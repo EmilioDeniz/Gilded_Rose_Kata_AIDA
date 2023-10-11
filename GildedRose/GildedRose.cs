@@ -1,20 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GildedRoseNS {
-    public class GildedRose {
+namespace GildedRoseNS
+{
+    public class GildedRose
+    {
         public IList<Item> Items;
 
-        public GildedRose(IList<Item> items) {
+        public GildedRose(IList<Item> items)
+        {
             Items = items;
         }
 
         public void UpdateQuality()
         {
 
-            if (!containsSulfuras(Items))
+            for (var i = 0; i < Items.Count; i++)
             {
-                for (var i = 0; i < Items.Count; i++)
+                if (!isSulfuras(Items[i].Name))
                 {
                     if (Items[i].Name != "Aged Brie" && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
                     {
@@ -79,17 +82,15 @@ namespace GildedRoseNS {
             }
         }
 
-        private bool containsSulfuras(IList<Item> items)
+        private bool isSulfuras(string name)
         {
-            foreach(Item item in items)
-            {
-                if(item.Name == "Sulfuras, Hand of Ragnaros") { return true; }
-            }
+            if (name == "Sulfuras, Hand of Ragnaros") { return true; }
             return false;
         }
     }
 
-    public class Item {
+    public class Item
+    {
         public string Name { get; set; }
 
         public int SellIn { get; set; }
