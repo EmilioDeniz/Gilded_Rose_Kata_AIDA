@@ -19,11 +19,12 @@ namespace GildedRoseNS
             {
                 if (!isSulfuras(item.Name))
                 {
-                    item.SellIn = item.SellIn - 1;
+                    item.SellIn --;
 
                     if (item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert")
-                    {
+                    {  
                         decreaseQuality(item, 1);
+                        if(item.Name == "Conjured") {decreaseQuality(item, 1); }   
                     }
                     else
                     {
@@ -33,10 +34,10 @@ namespace GildedRoseNS
                         {
                             if (item.SellIn <= 10)
                             {
-                                increaseQuality(item, 1);   
+                                increaseQuality(item, 1);
                                 if (item.SellIn <= 5)
                                 {
-                                    increaseQuality(item,1);
+                                    increaseQuality(item, 1);
                                 }
                             }
                         }
@@ -44,6 +45,18 @@ namespace GildedRoseNS
 
                     if (item.SellIn < 0)
                     {
+                        if(item.Name == "Conjured")
+                        {
+                            if (item.Quality <= 4)
+                            {
+                                item.Quality = 0;
+                            } else
+                            {
+                                decreaseQuality(item,1);
+                            }
+
+                        }
+
                         if (item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert")
                         {
                             decreaseQuality(item, 1);
